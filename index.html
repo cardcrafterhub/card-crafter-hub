@@ -4,362 +4,181 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Card Crafting Love — Handmade Cards Made with Love</title>
-  <meta name="description" content="A personal collection of handmade greeting card inspiration. Birthday cards, wedding cards, holiday cards, shadow box cards, shaker cards and more.">
+  <meta name="description" content="A personal collection of handmade greeting cards made with love. Browse birthday cards, Christmas cards, wedding cards and more.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:  '#FDF6EE',
+            petal:  '#F7DDE2',
+            rose:   '#C4768A',
+            'rose-dark': '#A35570',
+            blush:  '#E8B4BC',
+            sage:   '#9DB89A',
+            'sage-light': '#D4E6D2',
+            gold:   '#C9943A',
+            'gold-light': '#F0D9A8',
+            bark:   '#4A3728',
+            'bark-mid': '#7A5C48',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body:    ['Nunito', 'Arial', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --cream:      #FDF6EE;
-      --cream-dark: #F5EBE0;
-      --pink:       #E8B4BC;
-      --pink-light: #F7DDE2;
-      --sage:       #9DB89A;
-      --sage-light: #D4E6D2;
-      --gold:       #C9943A;
-      --gold-light: #F0D9A8;
-      --brown:      #4A3728;
-      --brown-mid:  #7A5C48;
-      --text:       #3D2B1F;
-      --text-light: #7A6055;
-      --white:      #FFFFFF;
+    body { font-family: 'Nunito', Arial, sans-serif; }
+    h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
+    .hero-bg {
+      background-image:
+        radial-gradient(ellipse at 10% 20%, rgba(232,180,188,0.45) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 80%, rgba(212,230,210,0.45) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(240,217,168,0.2) 0%, transparent 70%);
+      background-color: #FDF6EE;
     }
-
-    body {
-      font-family: Georgia, 'Times New Roman', serif;
-      background: var(--cream);
-      color: var(--text);
-      line-height: 1.7;
-      font-size: 17px;
-    }
-
-    /* ── Nav ── */
-    nav {
-      background: var(--white);
-      border-bottom: 3px solid var(--gold-light);
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 0;
-      text-decoration: none;
-      color: var(--brown);
-    }
-    .nav-brand-icon { font-size: 28px; }
-    .nav-brand-name {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      color: var(--brown);
-    }
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-      padding: 14px 0;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--brown-mid);
-      font-size: 16px;
-      font-weight: 600;
-      transition: color 0.2s;
-      font-family: Arial, sans-serif;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-
-    /* ── Hero ── */
-    .hero {
-      background: linear-gradient(135deg, var(--pink-light) 0%, var(--cream-dark) 50%, var(--sage-light) 100%);
-      text-align: center;
-      padding: 80px 24px 72px;
-      border-bottom: 1px solid var(--pink);
-    }
-    .hero-badge {
-      display: inline-block;
-      background: var(--gold-light);
-      color: var(--gold);
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 5px 16px;
-      border-radius: 999px;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-size: clamp(32px, 5vw, 52px);
-      color: var(--brown);
-      line-height: 1.2;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-    .hero h1 span { color: var(--gold); }
-    .hero p {
-      font-size: clamp(17px, 2vw, 20px);
-      color: var(--text-light);
-      max-width: 620px;
-      margin: 0 auto 36px;
-    }
-    .btn {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--white);
-      text-decoration: none;
-      font-family: Arial, sans-serif;
-      font-size: 17px;
-      font-weight: 700;
-      padding: 14px 36px;
-      border-radius: 999px;
-      transition: background 0.2s, transform 0.1s;
-      box-shadow: 0 4px 14px rgba(201,148,58,0.35);
-    }
-    .btn:hover { background: #b07d28; transform: translateY(-1px); }
-    .hero-flourish {
-      margin-top: 40px;
-      font-size: 32px;
-      letter-spacing: 8px;
-      opacity: 0.5;
-    }
-
-    /* ── Sections ── */
-    section { padding: 64px 24px; }
-    .container { max-width: 860px; margin: 0 auto; }
-
-    .section-label {
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 10px;
-    }
-    h2 {
-      font-size: clamp(24px, 3vw, 34px);
-      color: var(--brown);
-      margin-bottom: 16px;
-      line-height: 1.3;
-    }
-    h2 span { color: var(--gold); }
-
-    /* ── What you'll find ── */
-    .find-section {
-      background: var(--white);
-      border-top: 1px solid var(--pink-light);
-      border-bottom: 1px solid var(--pink-light);
-    }
-    .find-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 24px;
-      margin-top: 36px;
-    }
-    .find-card {
-      background: var(--cream);
-      border: 1px solid var(--cream-dark);
-      border-radius: 12px;
-      padding: 28px 20px;
-      text-align: center;
-      transition: box-shadow 0.2s, transform 0.15s;
-    }
-    .find-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
-    .find-card-icon { font-size: 36px; margin-bottom: 12px; }
-    .find-card h3 { font-size: 17px; color: var(--brown); margin-bottom: 8px; }
-    .find-card p { font-size: 14px; color: var(--text-light); line-height: 1.5; font-family: Arial, sans-serif; }
-
-    /* ── Topics strip ── */
-    .topics-section { background: var(--cream-dark); }
-    .topics-intro { max-width: 600px; margin-bottom: 32px; color: var(--text-light); }
-    .topics-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .tag {
-      background: var(--white);
-      border: 1.5px solid var(--pink);
-      color: var(--brown-mid);
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      padding: 6px 16px;
-      border-radius: 999px;
-      font-weight: 600;
-    }
-
-    /* ── Gallery CTA ── */
-    .cta-section {
-      background: linear-gradient(135deg, var(--pink-light), var(--gold-light));
-      text-align: center;
-    }
-    .cta-section p {
-      color: var(--text-light);
-      max-width: 500px;
-      margin: 0 auto 32px;
-      font-size: 18px;
-    }
-
-    /* ── Personal note ── */
-    .personal-section { background: var(--white); }
-    .personal-card {
-      background: var(--cream);
-      border-left: 4px solid var(--pink);
-      border-radius: 0 12px 12px 0;
-      padding: 28px 32px;
-      font-style: italic;
-      color: var(--text-light);
-      font-size: 17px;
-      max-width: 640px;
-    }
-    .personal-card cite {
-      display: block;
-      margin-top: 12px;
-      font-style: normal;
-      font-weight: 700;
-      color: var(--brown);
-      font-size: 15px;
-    }
-
-    /* ── Footer ── */
-    footer {
-      background: var(--brown);
-      color: rgba(255,255,255,0.7);
-      text-align: center;
-      padding: 32px 24px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-    }
-    footer a { color: var(--gold-light); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    .footer-brand { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px; font-family: Georgia, serif; }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .nav-links { gap: 18px; }
-      .nav-brand-name { font-size: 17px; }
-      section { padding: 48px 16px; }
-    }
+    .flourish { letter-spacing: 0.5rem; }
   </style>
 </head>
-<body>
+<body class="bg-cream text-bark min-h-screen">
 
-  <nav>
-    <a href="index.html" class="nav-brand">
-      <span class="nav-brand-icon">🌸</span>
-      <span class="nav-brand-name">Card Crafting Love</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="privacy.html">Privacy</a></li>
-    </ul>
+  <!-- Nav -->
+  <nav class="bg-white border-b-2 border-gold-light sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto px-6 flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-2 text-bark no-underline">
+        <span class="text-3xl">🌸</span>
+        <span class="font-display font-bold text-xl text-bark">Card Crafting Love</span>
+      </a>
+      <ul class="flex gap-8 list-none m-0 p-0">
+        <li><a href="index.html" class="font-body font-700 text-[15px] text-bark-mid no-underline hover:text-gold transition-colors font-bold">Home</a></li>
+        <li><a href="gallery.html" class="font-body font-700 text-[15px] text-bark-mid no-underline hover:text-gold transition-colors font-bold">Gallery</a></li>
+        <li><a href="privacy.html" class="font-body font-700 text-[15px] text-bark-mid no-underline hover:text-gold transition-colors font-bold">Privacy</a></li>
+      </ul>
+    </div>
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="hero-badge">✂️ A Personal Crafting Collection</div>
-    <h1>Welcome to<br><span>Card Crafting Love</span></h1>
-    <p>A personal collection of handmade greeting card inspiration — birthday cards, wedding cards, sympathy cards, holiday cards, shadow box cards, shaker cards, and so much more.</p>
-    <a href="gallery.html" class="btn">Visit the Gallery &rarr;</a>
-    <div class="hero-flourish">❀ ✦ ❀ ✦ ❀</div>
+  <section class="hero-bg py-24 px-6 text-center border-b border-blush">
+    <div class="max-w-3xl mx-auto">
+      <div class="inline-block bg-gold-light text-gold font-body font-bold text-xs tracking-widest uppercase px-5 py-2 rounded-full mb-8">
+        ✂️ A Personal Crafting Collection
+      </div>
+      <h1 class="text-5xl md:text-6xl font-display font-bold text-bark leading-tight mb-6">
+        Handmade Cards,<br>
+        <span class="text-rose italic">Made with Love</span>
+      </h1>
+      <p class="text-bark-mid text-lg md:text-xl leading-relaxed max-w-xl mx-auto mb-10">
+        Every card here was crafted by hand — cut, folded, stamped and embellished with care.
+        A little gallery of love, one card at a time.
+      </p>
+      <a href="gallery.html"
+         class="inline-block bg-rose text-white font-body font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:bg-rose-dark transition-colors no-underline">
+        See the Gallery &rarr;
+      </a>
+      <div class="flourish mt-12 text-blush text-2xl opacity-60 font-display">❀ ✦ ❀ ✦ ❀</div>
+    </div>
   </section>
 
-  <!-- What You'll Find -->
-  <section class="find-section">
-    <div class="container">
-      <div class="section-label">Explore the Collection</div>
-      <h2>What You Will <span>Find Here</span></h2>
-      <div class="find-grid">
-        <div class="find-card">
-          <div class="find-card-icon">🖼️</div>
-          <h3>Growing Gallery</h3>
-          <p>A beautiful, ever-growing collection of card crafting inspiration from every occasion.</p>
+  <!-- Personal note -->
+  <section class="bg-white py-20 px-6 border-b border-petal">
+    <div class="max-w-3xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+      <div class="text-8xl shrink-0 text-center">🌺</div>
+      <div>
+        <div class="font-body font-bold text-xs tracking-widest uppercase text-sage mb-3">About This Site</div>
+        <h2 class="font-display text-3xl md:text-4xl text-bark mb-5">A Labour of <span class="text-rose italic">Love</span></h2>
+        <blockquote class="border-l-4 border-blush pl-6 text-bark-mid text-lg leading-relaxed italic font-display">
+          "There is nothing quite like giving someone a card you made yourself.
+          Every fold, every stamp, every little embellishment is a small act of care —
+          a way of saying you matter enough for me to spend time making something just for you."
+        </blockquote>
+        <p class="mt-4 font-body text-bark-mid font-bold not-italic">— Card Crafting Love</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What you'll find -->
+  <section class="py-20 px-6 bg-cream border-b border-petal">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-14">
+        <div class="font-body font-bold text-xs tracking-widest uppercase text-sage mb-3">Explore</div>
+        <h2 class="font-display text-3xl md:text-4xl text-bark">What You Will <span class="text-gold">Find Here</span></h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="bg-white rounded-2xl p-7 text-center shadow-sm border border-petal hover:-translate-y-1 transition-transform">
+          <div class="text-4xl mb-4">🎂</div>
+          <h3 class="font-display text-lg text-bark mb-2">Every Occasion</h3>
+          <p class="font-body text-sm text-bark-mid leading-relaxed">Birthdays, weddings, Christmas, baby showers and every moment worth celebrating.</p>
         </div>
-        <div class="find-card">
-          <div class="find-card-icon">📺</div>
-          <h3>Tutorials &amp; How-To</h3>
-          <p>Guides and ideas for different card styles — from clean and simple to intricate 3D designs.</p>
+        <div class="bg-white rounded-2xl p-7 text-center shadow-sm border border-petal hover:-translate-y-1 transition-transform">
+          <div class="text-4xl mb-4">✂️</div>
+          <h3 class="font-display text-lg text-bark mb-2">Handmade Details</h3>
+          <p class="font-body text-sm text-bark-mid leading-relaxed">Die cutting, stamping, embossing, quilling and more — all done by hand.</p>
         </div>
-        <div class="find-card">
-          <div class="find-card-icon">🎀</div>
-          <h3>Every Occasion</h3>
-          <p>Ideas for birthdays, weddings, holidays, sympathy, and every moment worth celebrating.</p>
+        <div class="bg-white rounded-2xl p-7 text-center shadow-sm border border-petal hover:-translate-y-1 transition-transform">
+          <div class="text-4xl mb-4">🎀</div>
+          <h3 class="font-display text-lg text-bark mb-2">All Styles</h3>
+          <p class="font-body text-sm text-bark-mid leading-relaxed">From clean and simple to intricate pop-up, shaker and shadow box cards.</p>
         </div>
-        <div class="find-card">
-          <div class="find-card-icon">💛</div>
-          <h3>A Passion for Paper</h3>
-          <p>Handmade cards carry a warmth that store-bought cards never can. This is a celebration of that art.</p>
+        <div class="bg-white rounded-2xl p-7 text-center shadow-sm border border-petal hover:-translate-y-1 transition-transform">
+          <div class="text-4xl mb-4">💛</div>
+          <h3 class="font-display text-lg text-bark mb-2">Made with Heart</h3>
+          <p class="font-body text-sm text-bark-mid leading-relaxed">A store-bought card can never carry the warmth of something made by hand.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Topics -->
-  <section class="topics-section">
-    <div class="container">
-      <div class="section-label">Card Making Topics</div>
-      <h2>From Simple to <span>Spectacular</span></h2>
-      <p class="topics-intro">Whether you are just starting out or an experienced crafter, you will find inspiration here for every skill level.</p>
-      <div class="topics-tags">
-        <span class="tag">Birthday Cards</span>
-        <span class="tag">Christmas Cards</span>
-        <span class="tag">Wedding Cards</span>
-        <span class="tag">Shadow Box Cards</span>
-        <span class="tag">Shaker Cards</span>
-        <span class="tag">Pop-Up Cards</span>
-        <span class="tag">Watercolour</span>
-        <span class="tag">Quilling</span>
-        <span class="tag">Die Cutting</span>
-        <span class="tag">Stamping &amp; Inking</span>
-        <span class="tag">Iris Folding</span>
-        <span class="tag">Embossing</span>
-        <span class="tag">Alcohol Ink</span>
-        <span class="tag">Clean &amp; Simple</span>
-        <span class="tag">Vintage &amp; Rustic</span>
-        <span class="tag">Floral Cards</span>
-        <span class="tag">Sympathy Cards</span>
-        <span class="tag">Baby Shower Cards</span>
+  <section class="py-20 px-6 bg-petal border-b border-blush">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-10">
+        <div class="font-body font-bold text-xs tracking-widest uppercase text-sage mb-3">Card Types</div>
+        <h2 class="font-display text-3xl md:text-4xl text-bark">From Simple to <span class="text-rose italic">Spectacular</span></h2>
+      </div>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Birthday Cards</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Christmas Cards</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Wedding Cards</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Shadow Box Cards</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Shaker Cards</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Pop-Up Cards</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Watercolour</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Quilling</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Die Cutting</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Stamping &amp; Inking</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Embossing</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Floral Cards</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Sympathy Cards</span>
+        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Baby Shower Cards</span>
       </div>
     </div>
   </section>
 
   <!-- Gallery CTA -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="section-label">Ready to Browse?</div>
-      <h2>See the <span>Inspiration Gallery</span></h2>
-      <p>Browse the full collection of handmade card ideas, sorted by occasion and style.</p>
-      <a href="gallery.html" class="btn">Open the Gallery &rarr;</a>
+  <section class="py-24 px-6 text-center" style="background: linear-gradient(135deg, #F7DDE2 0%, #FDF6EE 50%, #F0D9A8 100%);">
+    <div class="max-w-xl mx-auto">
+      <div class="font-body font-bold text-xs tracking-widest uppercase text-sage mb-4">Ready to Browse?</div>
+      <h2 class="font-display text-4xl md:text-5xl text-bark mb-6">See the <span class="text-rose italic">Gallery</span></h2>
+      <p class="text-bark-mid text-lg leading-relaxed mb-10">
+        Browse the full collection of handmade cards — every one made with patience, creativity and a whole lot of love.
+      </p>
+      <a href="gallery.html"
+         class="inline-block bg-gold text-white font-body font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:opacity-90 transition-opacity no-underline">
+        Open the Gallery &rarr;
+      </a>
     </div>
   </section>
 
-  <!-- Personal Note -->
-  <section class="personal-section">
-    <div class="container">
-      <div class="section-label">About This Site</div>
-      <h2>A Personal <span>Hobby Project</span></h2>
-      <blockquote class="personal-card">
-        "This site is a personal hobby project — a labour of love dedicated to the art of handmade cards. There is nothing quite like giving someone a card you made yourself. Every fold, every stamp, every little embellishment is a small act of care."
-        <cite>— Card Crafting Love</cite>
-      </blockquote>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-brand">🌸 Card Crafting Love</div>
-    <p>Handmade cards made with love &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a></p>
-    <p style="margin-top:8px;">&copy; 2025 Card Crafting Love. All rights reserved.</p>
+  <!-- Footer -->
+  <footer class="bg-bark text-white/70 text-center py-10 px-6 font-body text-sm">
+    <div class="font-display font-bold text-white text-xl mb-2">🌸 Card Crafting Love</div>
+    <p>Handmade cards made with love &nbsp;·&nbsp; <a href="privacy.html" class="text-gold-light hover:underline no-underline">Privacy Policy</a></p>
+    <p class="mt-2">&copy; 2025 Card Crafting Love. All rights reserved.</p>
   </footer>
 
 </body>
