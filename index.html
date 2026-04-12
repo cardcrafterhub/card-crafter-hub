@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Crafting Love — Handmade Cards Made with Love</title>
+  <meta name="description" content="A personal collection of handmade greeting card inspiration. Birthday cards, wedding cards, holiday cards, shadow box cards, shaker cards and more.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #FDF6EE;
+      --cream-dark: #F5EBE0;
+      --pink:       #E8B4BC;
+      --pink-light: #F7DDE2;
+      --sage:       #9DB89A;
+      --sage-light: #D4E6D2;
+      --gold:       #C9943A;
+      --gold-light: #F0D9A8;
+      --brown:      #4A3728;
+      --brown-mid:  #7A5C48;
+      --text:       #3D2B1F;
+      --text-light: #7A6055;
+      --white:      #FFFFFF;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: var(--white);
+      border-bottom: 3px solid var(--gold-light);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 0;
+      text-decoration: none;
+      color: var(--brown);
+    }
+    .nav-brand-icon { font-size: 28px; }
+    .nav-brand-name {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--brown);
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      padding: 14px 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--brown-mid);
+      font-size: 16px;
+      font-weight: 600;
+      transition: color 0.2s;
+      font-family: Arial, sans-serif;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--pink-light) 0%, var(--cream-dark) 50%, var(--sage-light) 100%);
+      text-align: center;
+      padding: 80px 24px 72px;
+      border-bottom: 1px solid var(--pink);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold-light);
+      color: var(--gold);
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      color: var(--brown);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--text-light);
+      max-width: 620px;
+      margin: 0 auto 36px;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      padding: 14px 36px;
+      border-radius: 999px;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 4px 14px rgba(201,148,58,0.35);
+    }
+    .btn:hover { background: #b07d28; transform: translateY(-1px); }
+    .hero-flourish {
+      margin-top: 40px;
+      font-size: 32px;
+      letter-spacing: 8px;
+      opacity: 0.5;
+    }
+
+    /* ── Sections ── */
+    section { padding: 64px 24px; }
+    .container { max-width: 860px; margin: 0 auto; }
+
+    .section-label {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: clamp(24px, 3vw, 34px);
+      color: var(--brown);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    h2 span { color: var(--gold); }
+
+    /* ── What you'll find ── */
+    .find-section {
+      background: var(--white);
+      border-top: 1px solid var(--pink-light);
+      border-bottom: 1px solid var(--pink-light);
+    }
+    .find-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .find-card {
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      border-radius: 12px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .find-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .find-card-icon { font-size: 36px; margin-bottom: 12px; }
+    .find-card h3 { font-size: 17px; color: var(--brown); margin-bottom: 8px; }
+    .find-card p { font-size: 14px; color: var(--text-light); line-height: 1.5; font-family: Arial, sans-serif; }
+
+    /* ── Topics strip ── */
+    .topics-section { background: var(--cream-dark); }
+    .topics-intro { max-width: 600px; margin-bottom: 32px; color: var(--text-light); }
+    .topics-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tag {
+      background: var(--white);
+      border: 1.5px solid var(--pink);
+      color: var(--brown-mid);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    /* ── Gallery CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--pink-light), var(--gold-light));
+      text-align: center;
+    }
+    .cta-section p {
+      color: var(--text-light);
+      max-width: 500px;
+      margin: 0 auto 32px;
+      font-size: 18px;
+    }
+
+    /* ── Personal note ── */
+    .personal-section { background: var(--white); }
+    .personal-card {
+      background: var(--cream);
+      border-left: 4px solid var(--pink);
+      border-radius: 0 12px 12px 0;
+      padding: 28px 32px;
+      font-style: italic;
+      color: var(--text-light);
+      font-size: 17px;
+      max-width: 640px;
+    }
+    .personal-card cite {
+      display: block;
+      margin-top: 12px;
+      font-style: normal;
+      font-weight: 700;
+      color: var(--brown);
+      font-size: 15px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--brown);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 32px 24px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+    footer a { color: var(--gold-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-brand { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px; font-family: Georgia, serif; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .nav-links { gap: 18px; }
+      .nav-brand-name { font-size: 17px; }
+      section { padding: 48px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-icon">🌸</span>
+      <span class="nav-brand-name">Card Crafting Love</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">✂️ A Personal Crafting Collection</div>
+    <h1>Welcome to<br><span>Card Crafting Love</span></h1>
+    <p>A personal collection of handmade greeting card inspiration — birthday cards, wedding cards, sympathy cards, holiday cards, shadow box cards, shaker cards, and so much more.</p>
+    <a href="gallery.html" class="btn">Visit the Gallery &rarr;</a>
+    <div class="hero-flourish">❀ ✦ ❀ ✦ ❀</div>
+  </section>
+
+  <!-- What You'll Find -->
+  <section class="find-section">
+    <div class="container">
+      <div class="section-label">Explore the Collection</div>
+      <h2>What You Will <span>Find Here</span></h2>
+      <div class="find-grid">
+        <div class="find-card">
+          <div class="find-card-icon">🖼️</div>
+          <h3>Growing Gallery</h3>
+          <p>A beautiful, ever-growing collection of card crafting inspiration from every occasion.</p>
+        </div>
+        <div class="find-card">
+          <div class="find-card-icon">📺</div>
+          <h3>Tutorials &amp; How-To</h3>
+          <p>Guides and ideas for different card styles — from clean and simple to intricate 3D designs.</p>
+        </div>
+        <div class="find-card">
+          <div class="find-card-icon">🎀</div>
+          <h3>Every Occasion</h3>
+          <p>Ideas for birthdays, weddings, holidays, sympathy, and every moment worth celebrating.</p>
+        </div>
+        <div class="find-card">
+          <div class="find-card-icon">💛</div>
+          <h3>A Passion for Paper</h3>
+          <p>Handmade cards carry a warmth that store-bought cards never can. This is a celebration of that art.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Topics -->
+  <section class="topics-section">
+    <div class="container">
+      <div class="section-label">Card Making Topics</div>
+      <h2>From Simple to <span>Spectacular</span></h2>
+      <p class="topics-intro">Whether you are just starting out or an experienced crafter, you will find inspiration here for every skill level.</p>
+      <div class="topics-tags">
+        <span class="tag">Birthday Cards</span>
+        <span class="tag">Christmas Cards</span>
+        <span class="tag">Wedding Cards</span>
+        <span class="tag">Shadow Box Cards</span>
+        <span class="tag">Shaker Cards</span>
+        <span class="tag">Pop-Up Cards</span>
+        <span class="tag">Watercolour</span>
+        <span class="tag">Quilling</span>
+        <span class="tag">Die Cutting</span>
+        <span class="tag">Stamping &amp; Inking</span>
+        <span class="tag">Iris Folding</span>
+        <span class="tag">Embossing</span>
+        <span class="tag">Alcohol Ink</span>
+        <span class="tag">Clean &amp; Simple</span>
+        <span class="tag">Vintage &amp; Rustic</span>
+        <span class="tag">Floral Cards</span>
+        <span class="tag">Sympathy Cards</span>
+        <span class="tag">Baby Shower Cards</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="section-label">Ready to Browse?</div>
+      <h2>See the <span>Inspiration Gallery</span></h2>
+      <p>Browse the full collection of handmade card ideas, sorted by occasion and style.</p>
+      <a href="gallery.html" class="btn">Open the Gallery &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Personal Note -->
+  <section class="personal-section">
+    <div class="container">
+      <div class="section-label">About This Site</div>
+      <h2>A Personal <span>Hobby Project</span></h2>
+      <blockquote class="personal-card">
+        "This site is a personal hobby project — a labour of love dedicated to the art of handmade cards. There is nothing quite like giving someone a card you made yourself. Every fold, every stamp, every little embellishment is a small act of care."
+        <cite>— Card Crafting Love</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">🌸 Card Crafting Love</div>
+    <p>Handmade cards made with love &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a></p>
+    <p style="margin-top:8px;">&copy; 2025 Card Crafting Love. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

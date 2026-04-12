@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authorization Successful — Card Crafting Love</title>
+  <meta name="description" content="Authorization successful for Card Crafting Love.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #FDF6EE;
+      --cream-dark: #F5EBE0;
+      --pink:       #E8B4BC;
+      --pink-light: #F7DDE2;
+      --sage:       #9DB89A;
+      --sage-light: #D4E6D2;
+      --gold:       #C9943A;
+      --gold-light: #F0D9A8;
+      --brown:      #4A3728;
+      --brown-mid:  #7A5C48;
+      --text:       #3D2B1F;
+      --text-light: #7A6055;
+      --white:      #FFFFFF;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 17px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: var(--white);
+      border-bottom: 3px solid var(--gold-light);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 0;
+      text-decoration: none;
+      color: var(--brown);
+    }
+    .nav-brand-icon { font-size: 28px; }
+    .nav-brand-name { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--brown); }
+    .nav-links { display: flex; gap: 32px; list-style: none; padding: 14px 0; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--brown-mid);
+      font-size: 16px;
+      font-weight: 600;
+      transition: color 0.2s;
+      font-family: Arial, sans-serif;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 24px;
+    }
+
+    .callback-card {
+      background: var(--white);
+      border: 1px solid var(--pink-light);
+      border-top: 4px solid var(--sage);
+      border-radius: 16px;
+      padding: 48px 56px;
+      text-align: center;
+      max-width: 540px;
+      width: 100%;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    .callback-icon {
+      font-size: 56px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .callback-card h1 {
+      font-size: clamp(22px, 3vw, 30px);
+      color: var(--brown);
+      margin-bottom: 16px;
+    }
+
+    .callback-card p {
+      font-family: Arial, sans-serif;
+      font-size: 17px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .callback-card p:last-of-type { margin-bottom: 0; }
+
+    .callback-divider {
+      border: none;
+      border-top: 1px solid var(--cream-dark);
+      margin: 28px 0;
+    }
+
+    .callback-note {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #9DB89A;
+    }
+
+    footer {
+      background: var(--brown);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 32px 24px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+    footer a { color: var(--gold-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-brand { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px; font-family: Georgia, serif; }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 18px; }
+      .callback-card { padding: 36px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-icon">🌸</span>
+      <span class="nav-brand-name">Card Crafting Love</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="callback-card">
+      <span class="callback-icon">✅</span>
+      <h1>Authorization Successful</h1>
+      <p>You can close this window and return to the app.</p>
+      <hr class="callback-divider">
+      <p class="callback-note">Card Crafting Love — a personal hobby project made with love.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-brand">🌸 Card Crafting Love</div>
+    <p>Handmade cards made with love &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a></p>
+    <p style="margin-top:8px;">&copy; 2025 Card Crafting Love. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
