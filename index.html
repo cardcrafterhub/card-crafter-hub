@@ -1,185 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Card Crafting Love — Handmade Cards Made with Love</title>
-  <meta name="description" content="A personal collection of handmade greeting cards made with love. Browse birthday cards, Christmas cards, wedding cards and more.">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            cream:  '#FDF6EE',
-            petal:  '#F7DDE2',
-            rose:   '#C4768A',
-            'rose-dark': '#A35570',
-            blush:  '#E8B4BC',
-            sage:   '#9DB89A',
-            'sage-light': '#D4E6D2',
-            gold:   '#C9943A',
-            'gold-light': '#F0D9A8',
-            bark:   '#4A3728',
-            'bark-mid': '#7A5C48',
-          },
-          fontFamily: {
-            display: ['"Playfair Display"', 'Georgia', 'serif'],
-            body:    ['Nunito', 'Arial', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { font-family: 'Nunito', Arial, sans-serif; }
-    h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
-    .hero-bg {
-      background-image:
-        radial-gradient(ellipse at 10% 20%, rgba(232,180,188,0.45) 0%, transparent 50%),
-        radial-gradient(ellipse at 90% 80%, rgba(212,230,210,0.45) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(240,217,168,0.2) 0%, transparent 70%);
-      background-color: #FDF6EE;
-    }
-    .flourish { letter-spacing: 0.5rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card Crafting Love — Cottage Garden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Shadows+Into+Light&family=Gloock&display=swap" rel="stylesheet">
+<script src="data/cards.js"></script>
+<style>
+  :root {
+    --bg:       #EEF1E3;
+    --bg-deep:  #DDE4C8;
+    --cream:    #F8F3E4;
+    --leaf:     #4E6B3F;
+    --leaf-d:   #354A2A;
+    --pink:     #D48CA1;
+    --pink-d:   #A55F78;
+    --sun:      #E4B84A;
+    --ink:      #2A3222;
+    --ink-soft: #56614A;
+    --gingham:  #9FB387;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+    background:
+      linear-gradient(90deg, rgba(159,179,135,0.18) 50%, transparent 50%) 0 0/ 56px 56px,
+      linear-gradient(rgba(159,179,135,0.18) 50%, transparent 50%) 0 0/ 56px 56px,
+      var(--bg);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  .wrap { position: relative; z-index: 2; }
+
+  nav.site {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--cream);
+    padding: 18px 32px 26px;
+    box-shadow: 0 6px 0 var(--leaf), 0 10px 18px rgba(78,107,63,0.18);
+    position: relative;
+  }
+  nav.site::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -18px;
+    height: 18px;
+    background: radial-gradient(circle at 14px 0, var(--cream) 13px, transparent 14px) 0 0/28px 18px repeat-x;
+  }
+  .nav-row { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--leaf-d); }
+  .brand-wreath {
+    width: 58px; height: 58px; border-radius: 50%; border: 3px dotted var(--leaf);
+    display: flex; align-items: center; justify-content: center; background: var(--bg);
+    font-family: 'Shadows Into Light', cursive; font-size: 34px; color: var(--pink-d); transform: rotate(-6deg);
+  }
+  .brand-name { font-family: 'Gloock', serif; font-size: 30px; color: var(--leaf-d); letter-spacing: 0.01em; line-height: 1; }
+  .brand-sub { display: block; font-family: 'Shadows Into Light', cursive; font-size: 22px; color: var(--pink-d); margin-top: 2px; }
+  .nav-links { display: flex; gap: 10px; list-style: none; }
+  .nav-links a {
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 17px; color: var(--leaf-d);
+    text-decoration: none; padding: 10px 22px; border-radius: 999px; border: 2px solid transparent; transition: all 0.15s;
+  }
+  .nav-links a:hover { background: var(--bg); border-color: var(--leaf); }
+  .nav-links a.active { background: var(--leaf); color: var(--cream); border-color: var(--leaf); }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  .hero { max-width: 1200px; margin: 0 auto; padding: 80px 32px 60px; text-align: center; position: relative; }
+  .hero .garland { font-family: 'Shadows Into Light', cursive; color: var(--pink-d); font-size: 28px; margin-bottom: 6px; }
+  .hero h1 {
+    font-family: 'Gloock', serif; font-weight: 400; font-size: clamp(48px, 7vw, 84px); line-height: 1.05;
+    color: var(--leaf-d); letter-spacing: -0.01em; max-width: 900px; margin: 0 auto 24px;
+  }
+  .hero h1 .pink { color: var(--pink-d); }
+  .hero h1 .sun { background: var(--sun); padding: 0 10px; display: inline-block; transform: rotate(-1deg); }
+  .hero p.lede { font-family: 'Nunito', sans-serif; font-size: 22px; color: var(--ink-soft); max-width: 600px; margin: 0 auto 34px; line-height: 1.55; }
+  .btn-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 18px; padding: 16px 30px;
+    border-radius: 999px; border: 3px solid var(--leaf-d); background: var(--cream); color: var(--leaf-d);
+    cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.12s, background 0.12s;
+  }
+  .btn:hover { background: var(--leaf); color: var(--cream); transform: translateY(-2px); }
+  .btn.primary { background: var(--pink); border-color: var(--pink-d); color: var(--cream); }
+  .btn.primary:hover { background: var(--pink-d); }
+  .hero .flower { position: absolute; font-family: 'Shadows Into Light', cursive; font-size: 80px; color: var(--pink); opacity: 0.55; pointer-events: none; }
+  .hero .flower.tl { top: 20px; left: 20px; transform: rotate(-15deg); color: var(--sun); }
+  .hero .flower.tr { top: 40px; right: 40px; transform: rotate(12deg); }
+  .hero .flower.bl { bottom: 0; left: 30px; transform: rotate(8deg); color: var(--leaf); }
+  .hero .flower.br { bottom: 20px; right: 20px; transform: rotate(-10deg); color: var(--sun); }
+
+  .featured { max-width: 1200px; margin: 0 auto 40px; padding: 50px 32px; }
+  .featured-inner {
+    background: var(--cream); border-radius: 24px; padding: 50px;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center;
+    box-shadow: 0 10px 30px rgba(78,107,63,0.15); border: 2px dashed var(--leaf); position: relative;
+  }
+  .featured-inner::before, .featured-inner::after { content: '✿'; position: absolute; font-family: 'Shadows Into Light', cursive; color: var(--pink-d); font-size: 40px; }
+  .featured-inner::before { top: -20px; left: 30px; background: var(--cream); padding: 0 12px; }
+  .featured-inner::after  { bottom: -20px; right: 30px; background: var(--cream); padding: 0 12px; }
+  @media (max-width: 820px) { .featured-inner { grid-template-columns: 1fr; padding: 36px 24px; } }
+  .featured-inner .label { font-family: 'Shadows Into Light', cursive; font-size: 28px; color: var(--pink-d); margin-bottom: 6px; }
+  .featured-inner h2 { font-family: 'Gloock', serif; font-weight: 400; font-size: clamp(34px, 4.5vw, 48px); color: var(--leaf-d); line-height: 1.05; margin-bottom: 16px; }
+  .featured-inner p { font-size: 19px; color: var(--ink-soft); margin-bottom: 24px; max-width: 420px; }
+  .featured-card-wrap { aspect-ratio: 3/4; max-width: 340px; margin: 0 auto; position: relative; }
+  .featured-card { width: 100%; height: 100%; background: var(--cream); padding: 16px; border-radius: 10px; box-shadow: 0 16px 36px rgba(78,107,63,0.25); position: relative; transform: rotate(-3deg); }
+  .featured-card .photo { width: 100%; height: 100%; overflow: hidden; border-radius: 6px; }
+  .featured-card .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .featured-card .bow { position: absolute; top: -28px; left: 50%; transform: translateX(-50%) rotate(-4deg); font-family: 'Shadows Into Light', cursive; color: var(--pink-d); font-size: 48px; }
+
+  .gallery-head { max-width: 1200px; margin: 0 auto; padding: 60px 32px 20px; text-align: center; }
+  .gallery-head h1 { font-family: 'Gloock', serif; font-weight: 400; font-size: clamp(44px, 6vw, 68px); color: var(--leaf-d); line-height: 1; margin-bottom: 10px; }
+  .gallery-head h1 .pink { color: var(--pink-d); }
+  .gallery-head p { font-family: 'Shadows Into Light', cursive; font-size: 26px; color: var(--ink-soft); max-width: 540px; margin: 0 auto; }
+
+  .filters { max-width: 1200px; margin: 30px auto; padding: 0 32px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .chip {
+    font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 700; padding: 12px 22px 12px 20px;
+    background: var(--cream); border: 2px solid var(--leaf-d); border-radius: 4px 24px 4px 24px;
+    cursor: pointer; color: var(--leaf-d); display: inline-flex; align-items: center; gap: 10px; transition: all 0.12s; position: relative;
+  }
+  .chip::before { content: ''; width: 8px; height: 8px; background: var(--pink); border-radius: 50%; flex-shrink: 0; }
+  .chip:hover { background: var(--bg-deep); }
+  .chip.active { background: var(--leaf-d); color: var(--cream); }
+  .chip.active::before { background: var(--sun); }
+  .chip .count { font-family: 'Shadows Into Light', cursive; font-size: 15px; opacity: 0.85; font-weight: 400; }
+
+  .grid { max-width: 1200px; margin: 0 auto; padding: 20px 32px 100px; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 30px; }
+  .card-tile {
+    background: var(--cream); border: 2px solid var(--leaf-d); border-radius: 12px 12px 4px 4px;
+    padding: 12px 12px 0; cursor: pointer; font-family: inherit; color: inherit; text-align: left;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 6px 0 var(--leaf-d), 0 10px 18px rgba(78,107,63,0.15); position: relative;
+  }
+  .card-tile:hover { transform: translateY(-3px); box-shadow: 0 9px 0 var(--leaf-d), 0 14px 22px rgba(78,107,63,0.22); }
+  .card-tile .photo { aspect-ratio: 3/4; overflow: hidden; border-radius: 6px; background: var(--bg-deep); }
+  .card-tile .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card-tile .label-strip { margin: 14px -12px 0; padding: 12px 14px; border-top: 2px dashed var(--leaf); background: var(--cream); border-radius: 0 0 2px 2px; }
+  .card-tile .title { font-family: 'Gloock', serif; font-size: 20px; color: var(--leaf-d); line-height: 1.15; }
+  .card-tile .occ { font-family: 'Shadows Into Light', cursive; font-size: 20px; color: var(--pink-d); margin-top: -2px; }
+  .card-tile .fav {
+    position: absolute; top: 10px; right: 10px; width: 38px; height: 38px; border-radius: 50%;
+    background: var(--cream); border: 2px solid var(--leaf-d); cursor: pointer; z-index: 2;
+    font-size: 18px; color: var(--pink-d); display: flex; align-items: center; justify-content: center; font-family: inherit; padding: 0;
+  }
+  .card-tile .fav.on { background: var(--pink); color: var(--cream); }
+  .card-tile .fav::before { content: '♡'; }
+  .card-tile .fav.on::before { content: '♥'; }
+
+  .about-page { max-width: 760px; margin: 0 auto; padding: 70px 32px 80px; text-align: center; }
+  .about-page h1 { font-family: 'Gloock', serif; font-weight: 400; font-size: clamp(44px, 6vw, 68px); color: var(--leaf-d); line-height: 1; margin-bottom: 30px; }
+  .about-page h1 .pink { color: var(--pink-d); }
+  .about-card { background: var(--cream); padding: 48px; border-radius: 24px; border: 3px solid var(--leaf-d); box-shadow: 0 10px 0 var(--leaf-d); text-align: left; position: relative; }
+  .about-card::before { content: '✿'; position: absolute; top: -22px; left: 50%; transform: translateX(-50%); background: var(--cream); color: var(--pink-d); font-size: 40px; padding: 0 14px; font-family: 'Shadows Into Light', cursive; }
+  .about-card p { font-size: 20px; line-height: 1.7; color: var(--ink); margin-bottom: 18px; }
+  .about-card .sig { font-family: 'Shadows Into Light', cursive; font-size: 32px; color: var(--pink-d); text-align: right; margin-top: 20px; }
+  .about-stats { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .stat { background: var(--leaf-d); color: var(--cream); padding: 24px 12px; border-radius: 14px; text-align: center; }
+  .stat .num { font-family: 'Gloock', serif; font-size: 38px; color: var(--sun); line-height: 1; }
+  .stat .lbl { font-family: 'Shadows Into Light', cursive; font-size: 20px; margin-top: 4px; color: rgba(248,243,228,0.85); }
+
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(42,50,34,0.65); display: none; z-index: 500; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
+  .modal-backdrop.open { display: flex; }
+  .modal { background: var(--cream); max-width: 900px; width: 100%; padding: 40px; border: 3px solid var(--leaf-d); border-radius: 20px; box-shadow: 0 12px 0 var(--leaf-d); position: relative; max-height: 92vh; overflow-y: auto; }
+  .modal-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; background: var(--pink); border: 2px solid var(--leaf-d); font-size: 16px; color: var(--cream); cursor: pointer; font-family: inherit; }
+  .modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  @media (max-width: 720px) { .modal-body { grid-template-columns: 1fr; } }
+  .card-stage { perspective: 1800px; aspect-ratio: 3/4; position: relative; }
+  .card-3d { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.9s cubic-bezier(.2,.7,.2,1); transform-origin: left center; }
+  .card-stage.open .card-3d { transform: rotateY(-155deg); }
+  .card-front, .card-inside { position: absolute; inset: 0; backface-visibility: hidden; background: var(--cream); border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+  .card-front img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card-inside { transform: rotateY(180deg); padding: 32px; display: flex; flex-direction: column; justify-content: center; background: repeating-linear-gradient(transparent 0 34px, rgba(78,107,63,0.2) 34px 35px), var(--cream); border: 1px solid var(--leaf); }
+  .card-inside .msg { font-family: 'Shadows Into Light', cursive; font-size: 26px; color: var(--ink); line-height: 1.3; }
+  .card-inside .msg .sig { display: block; margin-top: 16px; color: var(--pink-d); }
+  .flip-hint { position: absolute; bottom: -28px; left: 0; right: 0; text-align: center; font-family: 'Shadows Into Light', cursive; font-size: 20px; color: var(--leaf-d); }
+  .modal-info h2 { font-family: 'Gloock', serif; font-weight: 400; font-size: 34px; color: var(--leaf-d); margin-bottom: 6px; line-height: 1.1; }
+  .modal-info .occ { font-family: 'Shadows Into Light', cursive; font-size: 26px; color: var(--pink-d); margin-bottom: 14px; }
+  .modal-info .desc { font-size: 17px; color: var(--ink-soft); line-height: 1.55; margin-bottom: 18px; }
+  .tech-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .tech-list span { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 13px; padding: 5px 12px; background: var(--bg); border: 2px solid var(--leaf); border-radius: 999px; color: var(--leaf-d); }
+  .palette-strip { display: flex; gap: 4px; margin-bottom: 20px; }
+  .palette-strip i { width: 32px; height: 32px; border: 2px solid var(--leaf-d); border-radius: 50%; display: inline-block; }
+
+  footer.site { background: var(--leaf-d); color: var(--cream); padding: 44px 32px; text-align: center; }
+  footer.site .brand-line { font-family: 'Gloock', serif; font-size: 24px; color: var(--sun); margin-bottom: 6px; }
+  footer.site .sub { font-family: 'Shadows Into Light', cursive; font-size: 22px; color: rgba(248,243,228,0.75); }
+
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(200%); background: var(--leaf-d); color: var(--cream); padding: 12px 24px; border-radius: 999px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 15px; transition: transform 0.3s; z-index: 1000; border: 2px solid var(--sun); }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+</style>
 </head>
-<body class="bg-cream text-bark min-h-screen">
+<body>
+<div class="wrap">
 
-  <!-- Nav -->
-  <nav class="bg-white border-b-2 border-gold-light sticky top-0 z-50 shadow-sm">
-    <div class="max-w-5xl mx-auto px-6 flex items-center justify-between h-16">
-      <a href="index.html" class="flex items-center gap-2 text-bark no-underline">
-        <span class="text-3xl">🌸</span>
-        <span class="font-display font-bold text-xl text-bark">Card Crafting Love</span>
-      </a>
-      <ul class="flex gap-8 list-none m-0 p-0">
-        <li><a href="index.html" class="font-body font-700 text-[15px] text-bark-mid no-underline hover:text-gold transition-colors font-bold">Home</a></li>
-        <li><a href="gallery.html" class="font-body font-700 text-[15px] text-bark-mid no-underline hover:text-gold transition-colors font-bold">Gallery</a></li>
-        <li><a href="privacy.html" class="font-body font-700 text-[15px] text-bark-mid no-underline hover:text-gold transition-colors font-bold">Privacy</a></li>
-      </ul>
+<nav class="site">
+  <div class="nav-row">
+    <a href="#" data-nav="home" class="brand">
+      <span class="brand-wreath">✿</span>
+      <span>
+        <span class="brand-name">Card Crafting Love</span>
+        <span class="brand-sub">a little garden of cards</span>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" data-nav="home" class="active">Home</a></li>
+      <li><a href="#" data-nav="gallery">Gallery</a></li>
+      <li><a href="#" data-nav="about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="view active" data-view="home">
+  <div class="hero">
+    <span class="flower tl">✿</span><span class="flower tr">❀</span>
+    <span class="flower bl">❁</span><span class="flower br">✿</span>
+    <div class="garland">✿ ✿ ✿</div>
+    <h1>A little <span class="sun">garden</span><br>of <span class="pink">handmade cards</span></h1>
+    <p class="lede">Every card here was snipped, stamped, and stuck together at my kitchen table. Have a potter around — no two the same.</p>
+    <div class="btn-row">
+      <a href="#" data-nav="gallery" class="btn primary">Wander the Gallery →</a>
+      <a href="#" data-nav="about" class="btn">About the Crafter</a>
     </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero-bg py-24 px-6 text-center border-b border-blush">
-    <div class="max-w-3xl mx-auto">
-      <div class="inline-block bg-gold-light text-gold font-body font-bold text-xs tracking-widest uppercase px-5 py-2 rounded-full mb-8">
-        ✂️ A Personal Crafting Collection
-      </div>
-      <h1 class="text-5xl md:text-6xl font-display font-bold text-bark leading-tight mb-6">
-        Handmade Cards,<br>
-        <span class="text-rose italic">Made with Love</span>
-      </h1>
-      <p class="text-bark-mid text-lg md:text-xl leading-relaxed max-w-xl mx-auto mb-10">
-        Every card here was crafted by hand — cut, folded, stamped and embellished with care.
-        A little gallery of love, one card at a time.
-      </p>
-      <a href="gallery.html"
-         class="inline-block bg-rose text-white font-body font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:bg-rose-dark transition-colors no-underline">
-        See the Gallery &rarr;
-      </a>
-      <div class="flourish mt-12 text-blush text-2xl opacity-60 font-display">❀ ✦ ❀ ✦ ❀</div>
-    </div>
-  </section>
-
-  <!-- Personal note -->
-  <section class="bg-white py-20 px-6 border-b border-petal">
-    <div class="max-w-3xl mx-auto flex flex-col md:flex-row gap-12 items-center">
-      <div class="text-8xl shrink-0 text-center">🌺</div>
+  </div>
+  <div class="featured">
+    <div class="featured-inner">
       <div>
-        <div class="font-body font-bold text-xs tracking-widest uppercase text-sage mb-3">About This Site</div>
-        <h2 class="font-display text-3xl md:text-4xl text-bark mb-5">A Labour of <span class="text-rose italic">Love</span></h2>
-        <blockquote class="border-l-4 border-blush pl-6 text-bark-mid text-lg leading-relaxed italic font-display">
-          "There is nothing quite like giving someone a card you made yourself.
-          Every fold, every stamp, every little embellishment is a small act of care —
-          a way of saying you matter enough for me to spend time making something just for you."
-        </blockquote>
-        <p class="mt-4 font-body text-bark-mid font-bold not-italic">— Card Crafting Love</p>
+        <div class="label">☘ this week's bloom</div>
+        <h2 id="featured-title">—</h2>
+        <p id="featured-desc">—</p>
+        <a href="#" data-nav="gallery" class="btn">See them all →</a>
       </div>
-    </div>
-  </section>
-
-  <!-- What you'll find -->
-  <section class="py-20 px-6 bg-cream border-b border-petal">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-14">
-        <div class="font-body font-bold text-xs tracking-widest uppercase text-sage mb-3">Explore</div>
-        <h2 class="font-display text-3xl md:text-4xl text-bark">What You Will <span class="text-gold">Find Here</span></h2>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="bg-white rounded-2xl p-7 text-center shadow-sm border border-petal hover:-translate-y-1 transition-transform">
-          <div class="text-4xl mb-4">🎂</div>
-          <h3 class="font-display text-lg text-bark mb-2">Every Occasion</h3>
-          <p class="font-body text-sm text-bark-mid leading-relaxed">Birthdays, weddings, Christmas, baby showers and every moment worth celebrating.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-7 text-center shadow-sm border border-petal hover:-translate-y-1 transition-transform">
-          <div class="text-4xl mb-4">✂️</div>
-          <h3 class="font-display text-lg text-bark mb-2">Handmade Details</h3>
-          <p class="font-body text-sm text-bark-mid leading-relaxed">Die cutting, stamping, embossing, quilling and more — all done by hand.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-7 text-center shadow-sm border border-petal hover:-translate-y-1 transition-transform">
-          <div class="text-4xl mb-4">🎀</div>
-          <h3 class="font-display text-lg text-bark mb-2">All Styles</h3>
-          <p class="font-body text-sm text-bark-mid leading-relaxed">From clean and simple to intricate pop-up, shaker and shadow box cards.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-7 text-center shadow-sm border border-petal hover:-translate-y-1 transition-transform">
-          <div class="text-4xl mb-4">💛</div>
-          <h3 class="font-display text-lg text-bark mb-2">Made with Heart</h3>
-          <p class="font-body text-sm text-bark-mid leading-relaxed">A store-bought card can never carry the warmth of something made by hand.</p>
+      <div class="featured-card-wrap">
+        <div class="featured-card">
+          <div class="bow">✿</div>
+          <div class="photo" id="featured-photo"></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Topics -->
-  <section class="py-20 px-6 bg-petal border-b border-blush">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-10">
-        <div class="font-body font-bold text-xs tracking-widest uppercase text-sage mb-3">Card Types</div>
-        <h2 class="font-display text-3xl md:text-4xl text-bark">From Simple to <span class="text-rose italic">Spectacular</span></h2>
+<section class="view" data-view="gallery">
+  <div class="gallery-head">
+    <h1>The <span class="pink">whole</span> garden</h1>
+    <p>click any card to open it — they really do open ✿</p>
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="view" data-view="about">
+  <div class="about-page">
+    <h1>About <span class="pink">me</span></h1>
+    <div class="about-card">
+      <p>I am a grandmother, a gardener, and a lifelong maker of small paper things. My kitchen table is almost always covered in paper scraps, stamps, ribbons and a very patient cup of tea.</p>
+      <p>I started making cards because I wanted the people I love to know they had been <em style="color:var(--pink-d);font-style:normal;font-weight:800">thought about</em> — not just remembered. A shop card is lovely, but a handmade one carries something else.</p>
+      <p>This is my little corner where my family and friends can see what I've been up to. Welcome in. ✿</p>
+      <div class="sig">— with love, Grandma</div>
+    </div>
+    <div class="about-stats">
+      <div class="stat"><div class="num" id="s-total">—</div><div class="lbl">cards grown</div></div>
+      <div class="stat"><div class="num" id="s-occ">—</div><div class="lbl">occasions</div></div>
+      <div class="stat"><div class="num">30+</div><div class="lbl">years crafting</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="brand-line">✿ Card Crafting Love ✿</div>
+  <div class="sub">a little garden of handmade cards · 2026</div>
+</footer>
+
+</div>
+
+<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div class="modal-body">
+      <div>
+        <div class="card-stage" id="card-stage">
+          <div class="card-3d">
+            <div class="card-front" id="modal-front"></div>
+            <div class="card-inside"><div class="msg" id="modal-inside-msg"></div></div>
+          </div>
+          <div class="flip-hint">click the card to open it ✿</div>
+        </div>
       </div>
-      <div class="flex flex-wrap gap-3 justify-center">
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Birthday Cards</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Christmas Cards</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Wedding Cards</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Shadow Box Cards</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Shaker Cards</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Pop-Up Cards</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Watercolour</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Quilling</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Die Cutting</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Stamping &amp; Inking</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Embossing</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Floral Cards</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Sympathy Cards</span>
-        <span class="bg-white border border-blush text-bark-mid font-body font-semibold text-sm px-4 py-2 rounded-full shadow-sm">Baby Shower Cards</span>
+      <div class="modal-info">
+        <div class="occ" id="modal-occ">—</div>
+        <h2 id="modal-title">—</h2>
+        <p class="desc" id="modal-desc">—</p>
+        <div class="tech-list" id="modal-tech"></div>
+        <div class="palette-strip" id="modal-colors"></div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- Gallery CTA -->
-  <section class="py-24 px-6 text-center" style="background: linear-gradient(135deg, #F7DDE2 0%, #FDF6EE 50%, #F0D9A8 100%);">
-    <div class="max-w-xl mx-auto">
-      <div class="font-body font-bold text-xs tracking-widest uppercase text-sage mb-4">Ready to Browse?</div>
-      <h2 class="font-display text-4xl md:text-5xl text-bark mb-6">See the <span class="text-rose italic">Gallery</span></h2>
-      <p class="text-bark-mid text-lg leading-relaxed mb-10">
-        Browse the full collection of handmade cards — every one made with patience, creativity and a whole lot of love.
-      </p>
-      <a href="gallery.html"
-         class="inline-block bg-gold text-white font-body font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:opacity-90 transition-opacity no-underline">
-        Open the Gallery &rarr;
-      </a>
-    </div>
-  </section>
+<div class="toast" id="toast">—</div>
 
-  <!-- Footer -->
-  <footer class="bg-bark text-white/70 text-center py-10 px-6 font-body text-sm">
-    <div class="font-display font-bold text-white text-xl mb-2">🌸 Card Crafting Love</div>
-    <p>Handmade cards made with love &nbsp;·&nbsp; <a href="privacy.html" class="text-gold-light hover:underline no-underline">Privacy Policy</a></p>
-    <p class="mt-2">&copy; 2025 Card Crafting Love. All rights reserved.</p>
-  </footer>
+<script>
+  const favs = new Set(JSON.parse(localStorage.getItem('ccl-favs-garden')||'[]'));
+  const saveFavs = () => localStorage.setItem('ccl-favs-garden', JSON.stringify([...favs]));
 
+  // Shows real photo if available, falls back to the generated SVG placeholder
+  function cardImageHtml(card) {
+    if (card.image) {
+      const fallback = cardPlaceholderSvg(card).replace(/'/g, '&#39;');
+      return `<img src="${card.image}" style="width:100%;height:100%;object-fit:cover;display:block" alt="${card.title.replace(/"/g,'&quot;')}" loading="lazy" onerror="this.outerHTML='${fallback}'">`;
+    }
+    return cardPlaceholderSvg(card);
+  }
+
+  document.querySelectorAll('[data-nav]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); const t = a.dataset.nav;
+    document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.dataset.view===t));
+    document.querySelectorAll('.nav-links a').forEach(l => l.classList.toggle('active', l.dataset.nav===t));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+
+  const featured = CARDS.find(c=>c.featured) || CARDS[0];
+  document.getElementById('featured-photo').innerHTML = cardImageHtml(featured);
+  document.getElementById('featured-title').textContent = featured.title;
+  document.getElementById('featured-desc').textContent = featured.description;
+
+  const occCounts = { all: CARDS.length };
+  CARDS.forEach(c => occCounts[c.occasion] = (occCounts[c.occasion]||0)+1);
+  let currentFilter = 'all';
+
+  function renderFilters(){
+    const items = [['all','Every card', occCounts.all]];
+    Object.keys(OCCASIONS).forEach(k => { if (occCounts[k]) items.push([k, OCCASIONS[k].label, occCounts[k]]); });
+    document.getElementById('filters').innerHTML = items.map(([k,l,n]) =>
+      `<button class="chip ${k===currentFilter?'active':''}" data-filter="${k}">${l}<span class="count">${n}</span></button>`
+    ).join('');
+    document.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => { currentFilter=b.dataset.filter; renderFilters(); renderGrid(); }));
+  }
+
+  function renderGrid(){
+    let visible = currentFilter==='all' ? CARDS : CARDS.filter(c=>c.occasion===currentFilter);
+    visible = visible.slice().sort((a,b)=>b.dateAdded.localeCompare(a.dateAdded));
+    document.getElementById('grid').innerHTML = visible.map(c => `
+      <div class="card-tile" data-id="${c.id}">
+        <button class="fav ${favs.has(c.id)?'on':''}" data-fav="${c.id}" aria-label="like"></button>
+        <div class="photo">${cardImageHtml(c)}</div>
+        <div class="label-strip">
+          <div class="title">${c.title}</div>
+          <div class="occ">${OCCASIONS[c.occasion]?.label.toLowerCase() || c.occasion}</div>
+        </div>
+      </div>
+    `).join('');
+    document.querySelectorAll('.card-tile').forEach(t => t.addEventListener('click', e => { if (e.target.closest('[data-fav]')) return; openCard(t.dataset.id); }));
+    document.querySelectorAll('[data-fav]').forEach(b => b.addEventListener('click', e => {
+      e.stopPropagation(); const id = b.dataset.fav;
+      if (favs.has(id)) favs.delete(id); else favs.add(id);
+      saveFavs(); renderGrid(); toast(favs.has(id)?'saved ✿':'removed');
+    }));
+  }
+  renderFilters(); renderGrid();
+
+  const modal = document.getElementById('modal');
+  const stage = document.getElementById('card-stage');
+  function openCard(id){
+    const c = CARDS.find(x=>x.id===id); if(!c) return;
+    document.getElementById('modal-front').innerHTML = cardImageHtml(c);
+    document.getElementById('modal-occ').textContent = OCCASIONS[c.occasion]?.label.toLowerCase() || c.occasion;
+    document.getElementById('modal-title').textContent = c.title;
+    document.getElementById('modal-desc').textContent = c.description;
+    document.getElementById('modal-tech').innerHTML = (c.techniques||[]).map(t=>`<span>${TECHNIQUES[t]||t}</span>`).join('');
+    document.getElementById('modal-colors').innerHTML = (c.colors||[]).map(h=>`<i style="background:${h}"></i>`).join('');
+    document.getElementById('modal-inside-msg').innerHTML = `Dearest friend,<br><br>A little card from the garden to you — made with paper, patience and plenty of tea. <span class="sig">— with love ✿</span>`;
+    stage.classList.remove('open');
+    modal.classList.add('open');
+  }
+  document.getElementById('modal-close').addEventListener('click', ()=>modal.classList.remove('open'));
+  modal.addEventListener('click', e => { if(e.target===modal) modal.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') modal.classList.remove('open'); });
+  stage.addEventListener('click', ()=>stage.classList.toggle('open'));
+
+  const toastEl = document.getElementById('toast');
+  function toast(m){ toastEl.textContent=m; toastEl.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>toastEl.classList.remove('show'),2000); }
+
+  document.getElementById('s-total').textContent = CARDS.length;
+  document.getElementById('s-occ').textContent = Object.keys(occCounts).filter(k=>k!=='all').length;
+</script>
 </body>
 </html>
