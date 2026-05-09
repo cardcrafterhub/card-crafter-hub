@@ -172,21 +172,24 @@
   .modal-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; background: var(--pink); border: 2px solid var(--leaf-d); font-size: 16px; color: var(--cream); cursor: pointer; font-family: inherit; }
   .modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
   @media (max-width: 720px) { .modal-body { grid-template-columns: 1fr; } }
-  .card-stage { perspective: 1800px; aspect-ratio: 3/4; position: relative; }
+  .card-stage { perspective: 1800px; aspect-ratio: 3/4; position: relative; cursor: pointer; }
   .card-3d { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.9s cubic-bezier(.2,.7,.2,1); transform-origin: left center; }
-  .card-stage.open .card-3d { transform: rotateY(-155deg); }
+  .card-stage.open .card-3d { transform: none; }
   .card-front, .card-inside { position: absolute; inset: 0; backface-visibility: hidden; background: var(--cream); border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
   .card-front img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .card-inside { transform: rotateY(180deg); padding: 32px; display: flex; flex-direction: column; justify-content: center; background: repeating-linear-gradient(transparent 0 34px, rgba(78,107,63,0.2) 34px 35px), var(--cream); border: 1px solid var(--leaf); }
+  .card-inside { transform: none; padding: 0; display: none; background: var(--cream); border: 1px solid var(--leaf); }
+  .card-stage.open .card-front { display: none; }
+  .card-stage.open .card-inside { display: block; }
+  .card-inside img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .card-inside .msg { font-family: 'Shadows Into Light', cursive; font-size: 26px; color: var(--ink); line-height: 1.3; }
   .card-inside .msg .sig { display: block; margin-top: 16px; color: var(--pink-d); }
   .flip-hint { position: absolute; bottom: -28px; left: 0; right: 0; text-align: center; font-family: 'Shadows Into Light', cursive; font-size: 20px; color: var(--leaf-d); }
   .modal-info h2 { font-family: 'Gloock', serif; font-weight: 400; font-size: 34px; color: var(--leaf-d); margin-bottom: 6px; line-height: 1.1; }
   .modal-info .occ { font-family: 'Shadows Into Light', cursive; font-size: 26px; color: var(--pink-d); margin-bottom: 14px; }
   .modal-info .desc { font-size: 17px; color: var(--ink-soft); line-height: 1.55; margin-bottom: 18px; }
-  .tech-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .tech-list { display: none; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
   .tech-list span { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 13px; padding: 5px 12px; background: var(--bg); border: 2px solid var(--leaf); border-radius: 999px; color: var(--leaf-d); }
-  .palette-strip { display: flex; gap: 4px; margin-bottom: 20px; }
+  .palette-strip { display: none; gap: 4px; margin-bottom: 20px; }
   .palette-strip i { width: 32px; height: 32px; border: 2px solid var(--leaf-d); border-radius: 50%; display: inline-block; }
 
   footer.site { background: var(--leaf-d); color: var(--cream); padding: 44px 32px; text-align: center; }
@@ -287,9 +290,9 @@
         <div class="card-stage" id="card-stage">
           <div class="card-3d">
             <div class="card-front" id="modal-front"></div>
-            <div class="card-inside"><div class="msg" id="modal-inside-msg"></div></div>
+            <div class="card-inside" id="modal-inside"></div>
           </div>
-          <div class="flip-hint">click the card to open it ✿</div>
+          <div class="flip-hint" id="flip-hint">click the card to open it ✿</div>
         </div>
       </div>
       <div class="modal-info">
@@ -373,16 +376,28 @@
     document.getElementById('modal-occ').textContent = OCCASIONS[c.occasion]?.label.toLowerCase() || c.occasion;
     document.getElementById('modal-title').textContent = c.title;
     document.getElementById('modal-desc').textContent = c.description;
-    document.getElementById('modal-tech').innerHTML = (c.techniques||[]).map(t=>`<span>${TECHNIQUES[t]||t}</span>`).join('');
-    document.getElementById('modal-colors').innerHTML = (c.colors||[]).map(h=>`<i style="background:${h}"></i>`).join('');
-    document.getElementById('modal-inside-msg').innerHTML = `Dearest friend,<br><br>A little card from the garden to you — made with paper, patience and plenty of tea. <span class="sig">— with love ✿</span>`;
+    document.getElementById('modal-tech').innerHTML = '';
+    document.getElementById('modal-colors').innerHTML = '';
+    const inside = document.getElementById('modal-inside');
+    const hint = document.getElementById('flip-hint');
+    if (c.insideImage) {
+      inside.innerHTML = `<img src="${c.insideImage}" alt="${c.title.replace(/"/g,'&quot;')} inside">`;
+      stage.dataset.canOpen = 'true';
+      hint.textContent = 'click the card to open it ✿';
+    } else {
+      inside.innerHTML = '';
+      stage.dataset.canOpen = 'false';
+      hint.textContent = 'outside photo only ✿';
+    }
     stage.classList.remove('open');
     modal.classList.add('open');
   }
   document.getElementById('modal-close').addEventListener('click', ()=>modal.classList.remove('open'));
   modal.addEventListener('click', e => { if(e.target===modal) modal.classList.remove('open'); });
   document.addEventListener('keydown', e => { if(e.key==='Escape') modal.classList.remove('open'); });
-  stage.addEventListener('click', ()=>stage.classList.toggle('open'));
+  stage.addEventListener('click', () => {
+    if (stage.dataset.canOpen === 'true') stage.classList.toggle('open');
+  });
 
   const toastEl = document.getElementById('toast');
   function toast(m){ toastEl.textContent=m; toastEl.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>toastEl.classList.remove('show'),2000); }
