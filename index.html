@@ -312,11 +312,26 @@
   const favs = new Set(JSON.parse(localStorage.getItem('ccl-favs-garden')||'[]'));
   const saveFavs = () => localStorage.setItem('ccl-favs-garden', JSON.stringify([...favs]));
 
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function safeImagePath(value) {
+    const path = String(value || '');
+    return /^images\/[^/]+\.(?:jpe?g|png|gif|webp)$/i.test(path) ? path : '';
+  }
+
   // Shows real photo if available, falls back to the generated SVG placeholder
   function cardImageHtml(card) {
-    if (card.image) {
+    const image = safeImagePath(card.image);
+    if (image) {
       const fallback = cardPlaceholderSvg(card).replace(/'/g, '&#39;');
-      return `<img src="${card.image}" style="width:100%;height:100%;object-fit:cover;display:block" alt="${card.title.replace(/"/g,'&quot;')}" loading="lazy" onerror="this.outerHTML='${fallback}'">`;
+      return `<img src="${escapeHtml(image)}" style="width:100%;height:100%;object-fit:cover;display:block" alt="${escapeHtml(card.title)}" loading="lazy" onerror="this.outerHTML='${fallback}'">`;
     }
     return cardPlaceholderSvg(card);
   }
@@ -341,7 +356,7 @@
     const items = [['all','Every card', occCounts.all]];
     Object.keys(OCCASIONS).forEach(k => { if (occCounts[k]) items.push([k, OCCASIONS[k].label, occCounts[k]]); });
     document.getElementById('filters').innerHTML = items.map(([k,l,n]) =>
-      `<button class="chip ${k===currentFilter?'active':''}" data-filter="${k}">${l}<span class="count">${n}</span></button>`
+      `<button class="chip ${k===currentFilter?'active':''}" data-filter="${escapeHtml(k)}">${escapeHtml(l)}<span class="count">${Number(n) || 0}</span></button>`
     ).join('');
     document.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => { currentFilter=b.dataset.filter; renderFilters(); renderGrid(); }));
   }
@@ -354,8 +369,8 @@
         <button class="fav ${favs.has(c.id)?'on':''}" data-fav="${c.id}" aria-label="like"></button>
         <div class="photo">${cardImageHtml(c)}</div>
         <div class="label-strip">
-          <div class="title">${c.title}</div>
-          <div class="occ">${OCCASIONS[c.occasion]?.label.toLowerCase() || c.occasion}</div>
+          <div class="title">${escapeHtml(c.title)}</div>
+          <div class="occ">${escapeHtml(OCCASIONS[c.occasion]?.label.toLowerCase() || c.occasion)}</div>
         </div>
       </div>
     `).join('');
@@ -380,8 +395,9 @@
     document.getElementById('modal-colors').innerHTML = '';
     const inside = document.getElementById('modal-inside');
     const hint = document.getElementById('flip-hint');
-    if (c.insideImage) {
-      inside.innerHTML = `<img src="${c.insideImage}" alt="${c.title.replace(/"/g,'&quot;')} inside">`;
+    const insideImage = safeImagePath(c.insideImage);
+    if (insideImage) {
+      inside.innerHTML = `<img src="${escapeHtml(insideImage)}" alt="${escapeHtml(c.title)} inside">`;
       stage.dataset.canOpen = 'true';
       hint.textContent = 'click the card to open it ✿';
     } else {
